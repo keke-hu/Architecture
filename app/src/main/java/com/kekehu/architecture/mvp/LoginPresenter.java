@@ -3,6 +3,7 @@ package com.kekehu.architecture.mvp;
 import android.text.TextUtils;
 
 import com.kekehu.architecture.LoginModel;
+import com.kekehu.architecture.utils.AppUtils;
 
 public class LoginPresenter implements LoginContract.ILoginPresenter {
 
@@ -21,7 +22,11 @@ public class LoginPresenter implements LoginContract.ILoginPresenter {
             loginView.toast("请输入密码");
             return;
         }
-        //TODO 业务逻辑，比如判断是不是手机号等
+
+        if(!AppUtils.isPhone(account)){
+            loginView.toast("请输入正确的手机号");
+            return;
+        }
 
         loginView.showLoading();
         loginModel.login(account, password, new LoginModel.Callback() {

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kekehu.architecture.LoginModel;
@@ -15,6 +16,8 @@ public class LoginMvcActivity extends BaseActivity {
     EditText etName, etPassword;
     Button btnLogin;
     LoginModel mLoginModel;
+    TextView tvResult;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +25,7 @@ public class LoginMvcActivity extends BaseActivity {
         etName = findViewById(R.id.et_name);
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
+        tvResult = findViewById(R.id.tv_result);
         mLoginModel = new LoginModel();
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,12 +49,12 @@ public class LoginMvcActivity extends BaseActivity {
         mLoginModel.login(etName.getText().toString(), etPassword.getText().toString(), new LoginModel.Callback() {
             @Override
             public void onSuccess(String token) {
-                Toast.makeText(mContext, token, Toast.LENGTH_SHORT).show();
+                tvResult.setText(token + "登录成功");
             }
 
             @Override
             public void fail(int code, String message) {
-                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+                tvResult.setText("登录失败：" + message);
             }
         });
     }

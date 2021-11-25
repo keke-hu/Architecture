@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.kekehu.architecture.LoginModel;
+import com.kekehu.architecture.utils.AppUtils;
 
 public class LoginViewModel extends AndroidViewModel {
 
@@ -46,6 +47,12 @@ public class LoginViewModel extends AndroidViewModel {
             hintString.setValue("请输入密码");
             return;
         }
+
+        if(!AppUtils.isPhone(account)){
+            hintString.setValue("请输入正确的手机号码");
+            return;
+        }
+
         showDialog.setValue(true);
         loginModel.login(account, password, new LoginModel.Callback() {
             @Override
