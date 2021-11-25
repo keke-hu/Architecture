@@ -19,6 +19,16 @@ public class LoginMvpActivity extends BaseActivity implements LoginContract.ILog
     LoginContract.ILoginPresenter loginPresenter;
 
     @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_mvp);

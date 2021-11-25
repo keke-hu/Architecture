@@ -17,7 +17,10 @@ public class LoginViewModel extends AndroidViewModel {
 
     private MutableLiveData<String> liveDataToken = new MutableLiveData<>();
 
-    private MutableLiveData<String> toastString = new MutableLiveData<>();
+    private MutableLiveData<Boolean> showDialog = new MutableLiveData<>();
+
+    //返回提示语，视图层可以自己选择用toast显示还是弹窗提示
+    private MutableLiveData<String> hintString = new MutableLiveData<>();
 
     public MutableLiveData<FailBean> getFailBeanMutableLiveData() {
         return failBeanMutableLiveData;
@@ -36,22 +39,25 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void login(String account, String password) {
         if (TextUtils.isEmpty(account)) {
-            toastString.setValue("请输入账号");
+            hintString.setValue("请输入账号");
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            toastString.setValue("请输入密码");
+            hintString.setValue("请输入密码");
             return;
         }
+        showDialog.setValue(true);
         loginModel.login(account, password, new LoginModel.Callback() {
             @Override
             public void onSuccess(String token) {
+                showDialog.setValue(false);
                 liveDataToken.setValue(token);
             }
 
             @Override
             public void fail(int code, String message) {
-                failBeanMutableLiveData.setValue(new FailBean(code,message));
+                showDialog.setValue(false);
+                failBeanMutableLiveData.setValue(new FailBean(code, message));
             }
         });
 
@@ -61,8 +67,8 @@ public class LoginViewModel extends AndroidViewModel {
         return liveDataToken;
     }
 
-    public LiveData<String> getToastString() {
-        return toastString;
+    public LiveData<String> getHintString() {
+        return hintString;
     }
 
     public class FailBean {

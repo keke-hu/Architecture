@@ -42,7 +42,7 @@ public class LoginMvvmActivity extends BaseActivity {
     private void initViewModel() {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         loginViewModel.init();
-        loginViewModel.getToastString().observe(this, new Observer<String>() {
+        loginViewModel.getHintString().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 toastShort(s);
@@ -52,13 +52,15 @@ public class LoginMvvmActivity extends BaseActivity {
         loginViewModel.getToken().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                tvResult.setText(s);
+                //TODO 登录成功，页面跳转
+
             }
         });
 
         loginViewModel.getFailBeanMutableLiveData().observe(this, new Observer<LoginViewModel.FailBean>() {
             @Override
             public void onChanged(LoginViewModel.FailBean failBean) {
+                //TODO 登录失败
                 tvResult.setText(failBean.getMessage());
             }
         });

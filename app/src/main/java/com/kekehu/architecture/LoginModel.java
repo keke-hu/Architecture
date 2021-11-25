@@ -16,6 +16,7 @@ public class LoginModel {
     }
 
     public void login(String name, String password, Callback callback) {
+        //TODO 添加公共参数等逻辑
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
