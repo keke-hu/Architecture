@@ -20,12 +20,12 @@ public class LoginMvpActivity extends BaseActivity implements LoginContract.ILog
 
     @Override
     public void showLoading() {
-
+        showDialog();
     }
 
     @Override
     public void hideLoading() {
-
+        dismissDialog();
     }
 
     @Override

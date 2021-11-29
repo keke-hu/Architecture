@@ -18,6 +18,10 @@ public class LoginViewModel extends AndroidViewModel {
 
     private MutableLiveData<String> liveDataToken = new MutableLiveData<>();
 
+    public MutableLiveData<Boolean> getShowDialog() {
+        return showDialog;
+    }
+
     private MutableLiveData<Boolean> showDialog = new MutableLiveData<>();
 
     //返回提示语，视图层可以自己选择用toast显示还是弹窗提示

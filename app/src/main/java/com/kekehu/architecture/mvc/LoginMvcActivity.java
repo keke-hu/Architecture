@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kekehu.architecture.LoginModel;
 import com.kekehu.architecture.R;
 import com.kekehu.architecture.base.BaseActivity;
+import com.kekehu.architecture.utils.AppUtils;
 
 public class LoginMvcActivity extends BaseActivity {
     EditText etName, etPassword;
@@ -40,20 +40,25 @@ public class LoginMvcActivity extends BaseActivity {
             toastShort("请输入账号");
             return;
         }
-
         if (TextUtils.isEmpty(etPassword.getText().toString())) {
             toastShort("请输入密码");
             return;
         }
-
+        if (!AppUtils.isPhone(etName.getText().toString())) {
+            toastShort("请输入正确的手机号");
+            return;
+        }
+        showDialog();
         mLoginModel.login(etName.getText().toString(), etPassword.getText().toString(), new LoginModel.Callback() {
             @Override
             public void onSuccess(String token) {
+                dismissDialog();
                 tvResult.setText(token + "登录成功");
             }
 
             @Override
             public void fail(int code, String message) {
+                dismissDialog();
                 tvResult.setText("登录失败：" + message);
             }
         });

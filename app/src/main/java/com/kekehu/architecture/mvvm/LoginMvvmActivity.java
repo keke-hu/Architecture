@@ -49,19 +49,29 @@ public class LoginMvvmActivity extends BaseActivity {
             }
         });
 
+        loginViewModel.getShowDialog().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    showDialog();
+                } else {
+                    dismissDialog();
+                }
+            }
+        });
+
         loginViewModel.getToken().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                tvResult.setText("登录成功：" + s);
                 //TODO 登录成功，页面跳转
-
             }
         });
 
         loginViewModel.getFailBeanMutableLiveData().observe(this, new Observer<LoginViewModel.FailBean>() {
             @Override
             public void onChanged(LoginViewModel.FailBean failBean) {
-                //TODO 登录失败
-                tvResult.setText(failBean.getMessage());
+                tvResult.setText("登录失败：" + failBean.getMessage());
             }
         });
     }
