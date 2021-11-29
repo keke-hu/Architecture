@@ -14,7 +14,7 @@ import com.kekehu.architecture.utils.AppUtils;
 public class LoginViewModel extends AndroidViewModel {
 
 
-    LoginModel loginModel;
+    LoginModel loginModel = new LoginModel();
 
     private MutableLiveData<String> liveDataToken = new MutableLiveData<>();
 
@@ -38,10 +38,6 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
 
-    public void init() {
-        loginModel = new LoginModel();
-    }
-
     public void login(String account, String password) {
         if (TextUtils.isEmpty(account)) {
             hintString.setValue("请输入账号");
@@ -52,7 +48,7 @@ public class LoginViewModel extends AndroidViewModel {
             return;
         }
 
-        if(!AppUtils.isPhone(account)){
+        if (!AppUtils.isPhone(account)) {
             hintString.setValue("请输入正确的手机号码");
             return;
         }

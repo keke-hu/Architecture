@@ -41,7 +41,6 @@ public class LoginMvvmActivity extends BaseActivity {
 
     private void initViewModel() {
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-        loginViewModel.init();
         loginViewModel.getHintString().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
