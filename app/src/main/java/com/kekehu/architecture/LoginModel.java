@@ -21,7 +21,7 @@ public class LoginModel {
             @Override
             public void run() {
                 if (callback != null) {
-                    if (new Random().nextInt(100) > 50) {
+                    if (new Random().nextInt(100) > 10) {
                         callback.onSuccess(name);
                     } else {
                         callback.fail(101, "出错了");
