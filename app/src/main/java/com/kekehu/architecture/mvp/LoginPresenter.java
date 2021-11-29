@@ -32,7 +32,6 @@ public class LoginPresenter implements LoginContract.ILoginPresenter {
         loginModel.login(account, password, new LoginModel.Callback() {
             @Override
             public void onSuccess(String token) {
-                //TODO 本地缓存，通知页面登录成功等等逻辑
                 loginView.hideLoading();
                 loginView.loginSuccess(token);
             }
