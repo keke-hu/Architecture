@@ -48,7 +48,6 @@ public class LoginMvvmActivity extends BaseActivity {
                 toastShort(s);
             }
         });
-
         loginViewModel.getShowDialog().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -59,7 +58,6 @@ public class LoginMvvmActivity extends BaseActivity {
                 }
             }
         });
-
         loginViewModel.getToken().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -67,7 +65,6 @@ public class LoginMvvmActivity extends BaseActivity {
                 //TODO 登录成功，页面跳转
             }
         });
-
         loginViewModel.getFailBeanMutableLiveData().observe(this, new Observer<LoginViewModel.FailBean>() {
             @Override
             public void onChanged(LoginViewModel.FailBean failBean) {
