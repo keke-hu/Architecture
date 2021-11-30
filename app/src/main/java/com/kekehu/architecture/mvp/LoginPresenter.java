@@ -27,9 +27,10 @@ public class LoginPresenter implements LoginContract.ILoginPresenter {
             loginView.toast("请输入正确的手机号");
             return;
         }
+        String encryptionPassWord=AppUtils.encryption(password);//数据加密
 
         loginView.showLoading();
-        loginModel.login(account, password, new LoginModel.Callback() {
+        loginModel.login(account, encryptionPassWord, new LoginModel.Callback() {
             @Override
             public void onSuccess(String token) {
                 loginView.hideLoading();

@@ -52,9 +52,9 @@ public class LoginViewModel extends AndroidViewModel {
             hintString.setValue("请输入正确的手机号码");
             return;
         }
-
+        String encryptionPassWord = AppUtils.encryption(password);//数据加密
         showDialog.setValue(true);
-        loginModel.login(account, password, new LoginModel.Callback() {
+        loginModel.login(account, encryptionPassWord, new LoginModel.Callback() {
             @Override
             public void onSuccess(String token) {
                 showDialog.setValue(false);

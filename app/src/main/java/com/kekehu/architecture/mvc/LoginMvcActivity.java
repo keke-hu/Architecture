@@ -48,8 +48,10 @@ public class LoginMvcActivity extends BaseActivity {
             toastShort("请输入正确的手机号");
             return;
         }
+
+        String encryptionPassWord = AppUtils.encryption(etPassword.getText().toString());//数据加密
         showDialog();
-        mLoginModel.login(etName.getText().toString(), etPassword.getText().toString(), new LoginModel.Callback() {
+        mLoginModel.login(etName.getText().toString(), encryptionPassWord, new LoginModel.Callback() {
             @Override
             public void onSuccess(String token) {
                 dismissDialog();
